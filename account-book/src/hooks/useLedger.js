@@ -33,7 +33,7 @@ export const useLedgers = (params) => {
 export const useLedger = (id) => {
   return useQuery({
     queryKey: LEDGER_KEYS.detail(id),
-    queryFn: () => getLedger(id).then((res) => res.data),
+    queryFn: () => getLedger(id).then((res) => res.data.data),
     enabled: !!id, // id가 있을 때만 요청
   });
 };
@@ -42,7 +42,7 @@ export const useLedger = (id) => {
 export const useCompare = () => {
   return useQuery({
     queryKey: LEDGER_KEYS.compare,
-    queryFn: () => compareExpenditure().then((res) => res.data),
+    queryFn: () => compareExpenditure().then((res) => res.data.data),
   });
 };
 
