@@ -3,7 +3,7 @@
 // 모든 API 요청은 이 인스턴스를 통해 이루어집니다.
 
 import axios from "axios";
-
+console.log("baseURL:", import.meta.env.VITE_API_BASE_URL);
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true, // 쿠키(refresh_token)를 자동으로 포함하기 위해 필요
@@ -48,7 +48,7 @@ api.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

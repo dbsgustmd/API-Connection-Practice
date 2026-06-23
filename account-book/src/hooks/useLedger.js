@@ -25,7 +25,7 @@ export const LEDGER_KEYS = {
 export const useLedgers = (params) => {
   return useQuery({
     queryKey: LEDGER_KEYS.list(params),
-    queryFn: () => getLedgers(params).then((res) => res.data),
+    queryFn: () => getLedgers(params).then((res) => res.data.data),
   });
 };
 
@@ -52,7 +52,8 @@ export const useCreateLedger = () => {
   return useMutation({
     mutationFn: createLedger,
     // 성공하면 목록 캐시를 무효화해서 자동으로 재조회
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: LEDGER_KEYS.all }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: LEDGER_KEYS.all }),
   });
 };
 
@@ -61,7 +62,8 @@ export const useUpdateLedger = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, data }) => updateLedger(id, data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: LEDGER_KEYS.all }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: LEDGER_KEYS.all }),
   });
 };
 
@@ -70,6 +72,7 @@ export const useDeleteLedger = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteLedger,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: LEDGER_KEYS.all }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: LEDGER_KEYS.all }),
   });
 };
